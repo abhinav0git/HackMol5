@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@media (max-width: 768px) {
+    .logoname{
+        display: none;
+    }
+    #imageRes {
+        max-height: 200px;
+        padding: 2.4rem;
+    }
+    #upsection {
+        flex-direction: column; 
+        margin: 0 1.5rem;
+    }
+    .custom-button {
+        width: 155px !important;
+    }
+    .browse-btn {
+        width: 110px !important;
+        margin: 0 1.5rem;
+    }
+    .uploadsection{
+        margin: 25px 4rem !important;
+    }
+
+}
+
+*{
+    box-sizing: border-box;    
+}
+
+body{
+    color: #1d1d1f;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-image: url(/static/img/squares.svg);
+    background-color: rgba(173, 216, 230, 0.419);
+    transition: background 0.2s linear;
+    
+}
+
+header {
+    width: 100%;
+    padding: 1px 0;
+    line-height: 1.2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+header h1 {
+    font-size: auto;
+}
+
+.navbar {
+    background: rgba(217, 237, 246, 0.82);
+    /* background: linear-gradient(0deg, rgba(217,237,246,1) 0%, rgba(4,99,181,1) 100%); */
+    /* -webkit-backdrop-filter: blur(5px); */
+    backdrop-filter: blur(4px);
+    position: fixed;
+    width: 75vw;
+    top: 2%;
+    display: flex;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.25);
+    align-items: center;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin: 1rem 2rem 0 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 20px;
+}
+
+.textandlogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0.2rem;
+    font-size: larger;
+}
+.navbar .logo img {
+    height: 80px;
+    width: 80px;
+    margin: 0.5rem;
+}
+
+.logoname {
+    color: black;
+    font-weight: bold;
+    justify-self: center;
+}
+
+.navbar a:hover {
+    transform: scale(1.05);
+}
+
+.aboutSection {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.about {
+    text-decoration: none;
+    color: #1d1d1f;
+}
+
+.tool-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-section h1 {
+    /* margin-top: 9rem; */
+    margin: 9.5rem auto 1.5rem auto;
+    font-family: Tt interfaces,sans-serif;
+    font-size: 4.8rem;
+    letter-spacing: -4.8px;
+    padding-top: 1.6rem;
+    text-align: center;
+}
+
+.slogan {
+    /* margin-top: 10vh; */
+    padding: 0 1.5rem 0 1.5rem;
+    text-align: center;
+    display: block;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    font-size: 18px;
+    font-weight:500;
+    line-height: 1.5;
+    font-size: 1.3rem;
+}
+
+.uploadsection {
+    padding: 2rem 0;
+    margin: 25px auto 25px auto;
+    /* width: 60%; */
+    background-color: #F9F5F6;
+    border-radius: 10px;
+    min-height: 350px;
+    max-height: fit-content;
+    max-width: 1200px;
+    border: 3px dashed #ccc;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* height: 433px; */ 
+    transition: .1s ease-in-out;
+}
+
+/* border color while drag and drop */
+.drag-over {
+    border: 3px dashed #8f8f8f;
+    border-radius: 20px;
+}
+
+#upsectionIndex:hover {
+    background-color: #F8E8EE;
+}  
+
+.afterImage {
+    width: 100%;
+    text-align: center;
+}
+
+.afterImage img {
+    max-height: 360px;
+}
+
+.before-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+ /* submit button */
+.custom-button {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 0px;
+    margin: 1.5rem 0px 0px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 1);
+    /* background: linear-gradient(90deg, rgb(71, 71, 71) 0%, rgb(23, 23, 23) 101.42%); */
+    background: linear-gradient(90deg, rgb(71, 71, 71) 0%, rgb(23, 23, 23) 101.42%);
+    border-radius: 5px;
+    display: flex;
+    width: 200px;
+    min-width: 150px;
+    height: 38px;
+    justify-content: space-around;
+    border: none;
+    outline: none;
+}
+
+.custom-button:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+ /* image logo box */
+img#svgImage {
+    margin-bottom: 1.5rem;
+}
+
+.name-img-percentage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+}
+
+.browse-btn {
+    min-width: 150px;
+    padding: 3px 0;
+    text-align: center;
+    background-color: #8066ff;
+    opacity: .7;
+    border-radius:8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reset-btn {
+    border: 1px solid #00000000;
+    margin: 0.5rem 0;
+    padding: 0 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px 0px rgb(79, 79, 79);
+    background: linear-gradient(90deg, rgb(71, 71, 71) 0%, rgb(23, 23, 23) 101.42%);
+    text-align: center;
+}
+
+.reset-btn:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.reset-btn span {
+    font-size: 25px;
+    color: white;
+}
+
+.reset-btn img{
+    width: 22px; 
+    height: 22px; 
+    margin-left: 4px;
+    padding-top: 4px;
+}
+
+#chartDiv {
+    max-width: 300px;
+    height: 200px;
+    margin: 0px auto;
+}
+
+.paraSection {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #EDF9EE;
+    border: 1px solid #2424241e;
+    border-radius: 8px;
+    box-shadow: #2424241e 5px 5px;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 850px;
+}
+
+.slogann{
+    margin: 0 1rem;
+    margin: 0 1rem;
+    padding: 1rem 2rem;
+}
+
+#circularcursor{
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid transparent;
+}
+
+.customBox {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    margin: 20px 0 20px 0;
+}
