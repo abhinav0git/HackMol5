@@ -7,7 +7,12 @@ from PIL import Image
 import torchvision.models as models
 import math
 from torchvision import transforms, datasets, models
+from sentence_transformers import SentenceTransformer, util
 
+csv_path = 'encoded_info1.csv'
+df_encoded = pd.read_csv(csv_path)
+df_encoded['Description_Vector'] = df_encoded['Description_Vector'].apply(lambda x: torch.Tensor(eval(x)))
+sent_model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
 app = Flask(__name__)
 
@@ -64,7 +69,6 @@ def model_loading():
     path = 'HackMol5/model/resnet50-transfer.pth'
     # Get the model name
     model_name = os.path.basename(path).split('-')[0]if '-' in os.path.basename(path) else os.path.basename(path).split('.')[0]
-
     checkpoint = torch.load(path, map_location = torch.device('cpu'))
 
 
@@ -122,6 +126,7 @@ def model_loading():
 
     return model
 
+model = model_loading()
 """######################################  PREDICTION FUNCTION  ################################################"""
 
 def predict(image_path, model, topk ):
@@ -178,44 +183,67 @@ def extract(index):
 def index():
     return render_template("index.html")
 
-
 # when the user hits submit button
 @app.route('/upload', methods=['POST', 'GET'])
 def upload_file():
     
-    if 'file' not in request.files:
+    tryMe = -1
+    if 'file' not in request.files and tryMe == -1:
         return 'No file part' 
-    file = request.files['file']
+
+    if 'file' in request.files and tryMe == -1:
+        file = request.files['file']
     
-    if file.filename == '':
+    if file.filename == '' and tryMe == -1:
         return 'No file selected'
     
-    if file and is_image_file(file.filename):
-    
-        #HackMol5\static\upload
-        img_path = 'HackMol5/static/upload/' + file.filename
-        file.save(img_path)
-        # print(img_path)
-
-        model = model_loading()
+    if file and is_image_file(file.filename) or tryMe != -1:
+       
+        if tryMe == -1:
+            img_path = 'HackMol5/static/upload/' + file.filename
+            file.save(img_path)
+        else:
+            img_path =f'static/tryme/{tryMe}.jpg'
 
         # Predict Function, takes (imagePath, modelName, number of top precitions to return) as parameters
         img, p, classes = predict(img_path, model, 1)
         result = pd.DataFrame({'p': p}, index = classes)
 
         img_path = img_path.replace('HackMol5/', '../')
-        # HackMol5\static\upload\neem.jpg
-        print(classes[0][0], classes[0][1], p[0])   
+        # print(classes[0][0], classes[0][1], p[0])
 
         info = extract(classes[0][0])
-        # print(info)
        
         return render_template("result.html", img_path = img_path, prediction_name = classes[0][1], confidence_level = p[0]*100, description = info )
 
     return 'Upload failed. Please check for correct file formats, only jpeg and png are accepted.'
 
-    return render_template("result.html")
 
+@app.route('/search_home', methods=['GET'])
+def search():
+    return render_template('search.html')
+
+@app.route('/search_result', methods=['POST'])
+def search_result():
+    # Load the CSV file within the search function
+   
+    query = request.form['query']
+    print(query)
+    query_vector = sent_model.encode(query, convert_to_tensor=True)
+
+    # Calculate cosine similarity scores
+    similarities = util.pytorch_cos_sim(query_vector.unsqueeze(0), torch.stack(df_encoded['Description_Vector'].tolist())).numpy()
+
+    # Get the indices of most similar items
+    indices = similarities.argsort()[0][::-1][:5]
+
+    results = []
+    for idx in indices[:2]:
+        similarity = similarities[0][idx]
+        item = df_encoded.iloc[idx]['Description']
+        results.append({'similarity': similarity, 'item': item})
+
+    return render_template('searchresult.html', query=query, results=results)
 
 """##################################### MAIN APP CALL #########################################"""
 if __name__ == "__main__":
