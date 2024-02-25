@@ -205,9 +205,10 @@ def upload_file():
 
         img_path = img_path.replace('newRepo/', '../')
         # newRepo\static\upload\neem.jpg
-        # print(classes[0][0], classes[0][1], p[0])
+        print(classes[0][0], classes[0][1], p[0])   
 
         info = extract(classes[0][0])
+        # print(info)
        
         return render_template("result.html", img_path = img_path, prediction_name = classes[0][1], confidence_level = p[0]*100, description = info )
 
