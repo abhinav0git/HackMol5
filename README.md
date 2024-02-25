@@ -57,3 +57,7 @@ Model checkpoint: Hackmol5/model/resnet50-transfer.pth
 - CSS
 - JavaScript
 - GitHub
+
+### 📝 Additional Information
+- Class labels and descriptions are stored in the info1.csv file.
+- Ensure to create a Python environment tailored to your machine specifications, especially if you are using VSCode.
