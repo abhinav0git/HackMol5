@@ -61,7 +61,7 @@ def process_image(image_path):
 
 # Basic details
 def model_loading():
-    path = 'newRepo/model/resnet50-transfer.pth'
+    path = 'HackMol5/model/resnet50-transfer.pth'
     # Get the model name
     model_name = os.path.basename(path).split('-')[0]if '-' in os.path.basename(path) else os.path.basename(path).split('.')[0]
 
@@ -163,7 +163,7 @@ def predict(image_path, model, topk ):
 def extract(index):
 
     if ( index < 30 ):
-        df = pd.read_csv("newRepo/info1.csv") 
+        df = pd.read_csv("HackMol5/info1.csv") 
 
         # Retrieve column based on index and store as string
         info = df.iloc[index, 2]
@@ -192,8 +192,8 @@ def upload_file():
     
     if file and is_image_file(file.filename):
     
-        #newRepo\static\upload
-        img_path = 'newRepo/static/upload/' + file.filename
+        #HackMol5\static\upload
+        img_path = 'HackMol5/static/upload/' + file.filename
         file.save(img_path)
         # print(img_path)
 
@@ -203,8 +203,8 @@ def upload_file():
         img, p, classes = predict(img_path, model, 1)
         result = pd.DataFrame({'p': p}, index = classes)
 
-        img_path = img_path.replace('newRepo/', '../')
-        # newRepo\static\upload\neem.jpg
+        img_path = img_path.replace('HackMol5/', '../')
+        # HackMol5\static\upload\neem.jpg
         print(classes[0][0], classes[0][1], p[0])   
 
         info = extract(classes[0][0])
